@@ -46,6 +46,6 @@ class ElasticSearchClient(RelationBase):
             print(unit['cluster_name'])
         '''
         for conv in self.conversations():
-            yield {'cluster_name': conv.get_remote('cluster_name'),
+            yield {'cluster_name': conv.get_remote('cluster-name'),
                    'host': conv.get_remote('private-address'),
                    'port': conv.get_remote('port')}
