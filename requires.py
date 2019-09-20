@@ -48,4 +48,5 @@ class ElasticSearchClient(RelationBase):
         for conv in self.conversations():
             yield {'cluster_name': conv.get_remote('cluster_name'),
                    'host': conv.get_remote('private-address'),
-                   'port': conv.get_remote('port')}
+                   'port': conv.get_remote('port'),
+                   'version': conv.get_remote('version', default=None)}
