@@ -46,6 +46,11 @@ class ElasticSearchClient(RelationBase):
             print(unit['cluster_name'])
         '''
         for conv in self.conversations():
-            yield {'cluster_name': conv.get_remote('cluster_name'),
+            cluster_name = conv.get_remote('cluster_name')
+            if cluster_name is None:
+                # Some non-reactive charms providing the elasticsearch relation
+                # use cluster-name instead.
+                cluster_name = conv.get_remote('cluster-name')
+            yield {'cluster_name': cluster_name,
                    'host': conv.get_remote('private-address'),
                    'port': conv.get_remote('port')}
